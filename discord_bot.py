@@ -3,7 +3,7 @@ import MeCab
 import yaml
 from datetime import datetime
 
-with open('input.yaml') as file:
+with open('config.yml') as file:
     object = yaml.safe_load(file)
     TOKEN = object['TOKEN']
     CHANNELID = object['CHANNELID']
@@ -16,7 +16,6 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-
 
 @client.event
 async def on_message(message):
@@ -38,6 +37,9 @@ async def on_message(message):
             await channel.send("Take a good rest!! The current time is {}.".format(moment))
             await channel.send("Today's work time is {} hour.".format(working))
             await channel.send("Today's wage is {} yen".format(working*wage))
+
+        elif message.content == "help":
+            await channel.send("Is there anything that I can help you with this time?\nHelp with attendance record.\nPlease say 'in' on this channel when you go to work")
 
 client.run(TOKEN)
 
